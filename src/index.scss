@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "Kotori Rose";
+    src: url('./assets/fonts/KotoriRose-Regular.otf');
+}
+
+@font-face {
+    font-family: "Kotori Rose Bold";
+    src: url('./assets/fonts/KotoriRose-Bold.otf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #F9F9F9;
+}

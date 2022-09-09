@@ -1,0 +1,104 @@
+.main {
+  max-width: 1092px;
+  background: #ffffff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.07);
+  border-radius: 23.8922px;
+  margin: auto;
+  margin-top: 82px;
+  padding: 57px 95px 79px 30px;
+
+  .main-header {
+    text-align: center;
+    h4 {
+      font-family: "Kotori Rose Bold";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 32px;
+      text-align: center;
+      color: #212135;
+      margin-bottom: 9px;
+    }
+
+    p {
+      font-family: "Karla";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #4f4f4f;
+      max-width: 450px;
+      margin: auto;
+    }
+  }
+
+  .info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 35px;
+
+      .right {
+          width: 435px;
+          .select-wrapper{
+              display: flex;
+              gap:55px;
+
+              > div {
+                  flex-grow: 1;
+                  flex-basis: 0;
+              }
+          }
+      }
+    .left {
+      width: 356px;
+      margin-top: -67px;
+      .img-wrapper {
+        height: 162px;
+        width: 162px;
+        background: #ffffff;
+        padding: 16px;
+        border-radius: 47px;
+        box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.05);
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .profile {
+        margin-top: 50px;
+        .field {
+          display: flex;
+          align-items: center;
+          margin: 5px 0;
+
+          > h6,
+          & > p {
+            flex-grow: 1;
+            flex-basis: 0;
+          }
+
+          h6 {
+            font-family: "Karla";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            color: #828282;
+          }
+
+          p {
+            font-family: "Karla";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 28px;
+            color: #3f434a;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+.text-input {
+  max-width: 434px;
+  margin-top: 16px;
+
+  label {
+    font-family: "Karla";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #5e5e5e;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .select {
+    padding: 0 13.8px 0 18px;
+    width: 100%;
+    max-width: 198px;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    height: 48px;
+    overflow: hidden;
+    select {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: transparent;
+      font-family: "Karla";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #828282;
+    }
+  }
+
+  .input {
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    border: 1px solid #bdbdbd;
+    border-radius: 7px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+    input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      font-family: "Karla";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #333333;
+    }
+  }
+}

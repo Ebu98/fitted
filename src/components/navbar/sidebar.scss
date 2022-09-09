@@ -1,0 +1,151 @@
+.sidebar {
+  width: 435px;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  background: linear-gradient(
+    192.77deg,
+    rgba(0, 240, 255, 0.8) -22.81%,
+    rgba(83, 118, 255, 0.8) 28.04%,
+    rgba(0, 12, 182, 0.8) 114.1%
+  );
+  box-shadow: 7px 0px 106px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  padding-top: 48px;
+
+  .logo {
+    position: absolute;
+    top: 24px;
+    left: 34px;
+  }
+
+  .top-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .name-accronym-wrapper {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 9.97px;
+
+      .username {
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 34px;
+        line-height: 41px;
+        text-align: center;
+        letter-spacing: -0.3px;
+        color: #ffffff;
+        font-family: "Kotori Rose";
+        text-shadow: 0px 4px 4px rgba(38, 37, 37, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000cb6;
+        border: 1px solid #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: 1px solid #ffffff;
+      }
+
+      .edit-wrapper {
+        width: 32px;
+        height: 32px;
+        border-radius: 50px;
+        background: #f4f4f4;
+        border: 4px solid #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .fullname {
+      font-family: "Kotori Rose Bold";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 29px;
+      text-align: center;
+      letter-spacing: -0.3px;
+      color: #ffffff;
+      margin: 15.88px 0 10px 0;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      p {
+        font-family: "Karla";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: center;
+        color: #ffffff;
+      }
+    }
+
+    .detail {
+      margin: 11px 0 19px 0;
+      font-family: "Karla";
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 14px;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .select-wrapper {
+      padding: 0 24px 0 18px;
+      width: 100%;
+      max-width: 185px;
+      border: 1px solid #ffffff;
+      border-radius: 6px;
+      height: 40px;
+      overflow: hidden;
+      select {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: transparent;
+        color: #ffffff;
+      }
+    }
+  }
+  .links {
+    margin-top: 35px;
+    .link-items {
+      display: flex;
+      align-items: center;
+      gap: 52px;
+      width: 364px;
+      border-radius: 0px 50px 50px 0px;
+      margin: 35px 0 35px 0;
+      padding: 20px;
+      padding-left: 53px;
+
+      &.active, &:hover {
+        background-color: #ffffff;
+
+        p {
+          color: #000000;
+        }
+      }
+
+      p {
+        font-family: "Karla";
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #ffffff;
+      }
+    }
+  }
+}
