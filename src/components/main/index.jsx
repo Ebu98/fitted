@@ -1,48 +1,68 @@
 import React, { useState, useEffect } from "react";
+import * as _ from "lodash";
 import TextInput from "../inputs/TextInput";
 import Select from "../inputs/Select";
 import shop from "../../assets/img/shop.png";
 import dots from "../../assets/img/dots.png";
 import user from "../../assets/img/User.png";
+
 import Button from "../inputs/Button";
 import "./main.scss";
 
 const Main = () => {
-  const [values, setValues] = useState("");
+  const [banks, setBanks] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [inputs, setInputs] = useState({
     bankCode: "",
     accountNo: "",
-    bankName: ""
+    bankName: "",
+    accountName: "",
+    gender: "",
+    style: "",
   });
+  const [typing, setTyping] = useState(false);
   const [error, setError] = useState({
     bankCode: "",
     accountNo: "",
-    bankName: ""
+    bankName: "",
+    accountName: "",
+    gender: "",
+    style: "",
   });
   const [isSuccess, setIsSuccess] = useState(false);
   const [isFailure, setIsFailure] = useState(false);
-  const { bankCode, accountNo } = inputs;
-
-  function debounce_leading(func, timeout = 300) {
-    let timer;
-    return (...args) => {
-      if (!timer) {
-        func.apply(this, args);
-      }
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        timer = undefined;
-      }, timeout);
-    };
-  }
+  const { bankCode, accountNo, bankName, accountName } = inputs;
 
   const onChange = ({ target: { name, value } }) => {
-    debounce_leading(() =>
-      setInputs({
-        ...inputs,
-        [name]: value,
-      })
+    if (name === "accountNo") {
+      if (Number.isNaN(Number(value))) {
+        return
+      }
+    }
+    if (value) {
+      setError({
+        ...error,
+        [name]: "",
+      });
+    }
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  const sortBanks = () => {
+    setTyping(false);
+    const filter = banks.filter((item) =>
+      item.name.toLowerCase().includes(bankName.toLowerCase())
     );
+    setSuggestions(bankName ? filter : []);
+  };
+
+  const onKeyUp = _.debounce(sortBanks, 500);
+
+  const onKeyDown = () => {
+    setTyping(true);
   };
 
   const onSubmit = (e) => {
@@ -52,18 +72,31 @@ const Main = () => {
       bankCode: "",
       accountNo: "",
     });
+    if (!bankName) {
+      return setError({
+        ...error,
+        bankName: "Opps, Bank name not found",
+      });
+    }
+    if (!accountName) {
+      return setError({
+        ...error,
+        accountName: "Opps, Account name not found",
+      });
+    }
     if (!bankCode) {
       return setError({
         ...error,
-        bankCode: "Opps, Account details not found",
+        bankCode: "Opps, Account details not found. Select bank from dropdown",
       });
     }
     if (!accountNo) {
       return setError({
         ...error,
-        accountNo: "Opps, Account Number not found",
+        accountNo: "Opps, Account number not found",
       });
     }
+
     fetch(
       "https://fitted-staging-api.herokuapp.com/api/v1/bank/resolveAccount",
       {
@@ -80,15 +113,17 @@ const Main = () => {
       });
   };
 
-  const fetchData = () => {
-    fetch("https://fitted-staging-api.herokuapp.com/api/v1/bank/banks")
-      .then((response) => response.json())
-      .then((data) => setValues(data))
-      .catch((error) => console.log(error));
+  const closeSuggestions = () => setSuggestions([]);
+
+  const selectBank = (bank) => {
+    setInputs({
+      ...inputs,
+      bankName: bank.name,
+      bankCode: bank.code,
+    });
+    closeSuggestions();
   };
-  useEffect(() => {
-    fetchData();
-  }, []);
+
   const profile = [
     {
       field: "Name:",
@@ -120,11 +155,22 @@ const Main = () => {
     },
   ];
   const options = [
+    { value: "0", label: "Male" },
+    { value: "1", label: "Female" },
+  ];
+  const option = [
     { value: "0", label: "Red" },
     { value: "1", label: "Blue" },
     { value: "2", label: "Green" },
     { value: "3", label: "Yellow" },
   ];
+
+  useEffect(() => {
+    fetch("https://fitted-staging-api.herokuapp.com/api/v1/bank/banks")
+      .then((res) => res.json())
+      .then((json) => setBanks(json.data));
+  }, []);
+
   return (
     <div className="main">
       <div className="main-header">
@@ -154,7 +200,7 @@ const Main = () => {
             <div>
               <Select
                 label="Gender you Sew for?"
-                placeholder="Please select"
+                placeholder="Male"
                 options={options}
               />
             </div>
@@ -162,19 +208,41 @@ const Main = () => {
               <Select
                 label="Styles you Sew?"
                 placeholder="Please select"
-                options={options}
+                options={option}
               />
             </div>
           </div>
 
-          <div>
+          <div className="has-autocomplete">
             <TextInput
               label="Bank Name"
               name="bankName"
               imgSrc={shop}
               placeholder="Please select your bank"
               onChange={onChange}
+              onKeyUp={onKeyUp}
+              onKeyDown={onKeyDown}
+              value={inputs.bankName}
+              error={error}
             />
+
+            {suggestions.length > 0 && (
+              <div className="autocomplete">
+                {!typing ? (
+                  suggestions.map((bank, id) => (
+                    <div
+                      key={id}
+                      className="autocomplete-items"
+                      onClick={() => selectBank(bank)}
+                    >
+                      <span>{bank.name}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p>Typing...</p>
+                )}
+              </div>
+            )}
           </div>
           <div>
             <TextInput
@@ -184,19 +252,21 @@ const Main = () => {
               onChange={onChange}
               name="accountNo"
               value={inputs.accountNo}
+              error={error}
             />
           </div>
           <div>
             <TextInput
+              name="accountName"
               label="Account Name"
               imgSrc={user}
+              value={inputs.accountName}
               placeholder="Abiola Ogunjobi"
               onChange={onChange}
+              error={error}
             />
           </div>
-          <div>
-            <Button onClick={onSubmit}>Submit Application</Button>
-          </div>
+          <Button onClick={onSubmit}>Submit Application</Button>
         </div>
       </div>
     </div>

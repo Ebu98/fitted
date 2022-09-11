@@ -65,9 +65,10 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="links">
-        {links.map(({ text, icon: Icon }) => {
+        {links.map(({ text, icon: Icon }, i) => {
           return (
             <div
+              key={i}
               className={`link-items ${text === "My profile" ? "active" : ""}`}
             >
               <Icon />

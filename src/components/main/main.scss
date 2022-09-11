@@ -33,22 +33,22 @@
   }
 
   .info {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
 
-      .right {
-          width: 435px;
-          .select-wrapper{
-              display: flex;
-              gap:55px;
+    .right {
+      width: 435px;
+      .select-wrapper {
+        display: flex;
+        gap: 55px;
 
-              > div {
-                  flex-grow: 1;
-                  flex-basis: 0;
-              }
-          }
+        > div {
+          flex-grow: 1;
+          flex-basis: 0;
+        }
       }
+    }
     .left {
       width: 356px;
       margin-top: -67px;
@@ -97,6 +97,34 @@
             line-height: 28px;
             color: #3f434a;
           }
+        }
+      }
+    }
+  }
+
+  .has-autocomplete {
+    position: relative;
+
+    .autocomplete {
+      position: absolute;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 2px #111111;
+      left: 0;
+      right: 0;
+      max-height: 100px;
+      bottom: -50%;
+      transform: translateY(50%);
+      overflow: auto;
+
+      p,
+      & .autocomplete-items {
+        padding: 1em 2em;
+      }
+
+      .autocomplete-items {
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
         }
       }
     }
